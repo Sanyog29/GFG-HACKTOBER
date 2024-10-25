@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Data</title>
+</head>
+<body>
+    <h1>Predict Data</h1>
+    <form method="post">
+        <label for="target">Select target column:</label>
+        <select name="target" id="target">
+            {% for feature in features %}
+                <option value="{{ feature }}">{{ feature }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Predict">
+    </form>
+    <a href="{{ url_for('analyze', filename=filename) }}">Back to Analysis</a>
+    <a href="{{ url_for('index') }}">Upload New File</a>
+</body>
+</html>

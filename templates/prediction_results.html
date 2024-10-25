@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+</head>
+<body>
+    <h1>Prediction Results</h1>
+    <h2>{{ metric_name }}: {{ performance }}</h2>
+    <h2>Feature Importance:</h2>
+    <img src="data:image/png;base64,{{ importance_url }}" alt="Feature Importance">
+    <a href="{{ url_for('predict', filename=filename) }}">Make Another Prediction</a>
+    <a href="{{ url_for('analyze', filename=filename) }}">Back to Analysis</a>
+    <a href="{{ url_for('index') }}">Upload New File</a>
+</body>
+</html>

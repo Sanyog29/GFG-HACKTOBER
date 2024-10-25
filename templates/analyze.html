@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyze Data</title>
+</head>
+<body>
+    <h1>Analyze Data</h1>
+    <h2>Data Info:</h2>
+    <pre>{{ info }}</pre>
+    <h2>First 5 rows:</h2>
+    {{ head|safe }}
+    <a href="{{ url_for('analyze_data', filename=filename) }}">Analyze Data</a>
+    <a href="{{ url_for('predict', filename=filename) }}">Predict Data</a>
+    <a href="{{ url_for('index') }}">Upload New File</a>
+</body>
+</html>
