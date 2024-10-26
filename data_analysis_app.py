@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, send_file
+from flask import Flask, render_template, request, redirect, url_for, send_file 
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -140,12 +140,19 @@ def predict(filename):
         feature_importance = pd.DataFrame({'feature': X.columns, 'importance': model.feature_importances_})
         feature_importance = feature_importance.sort_values('importance', ascending=False)
         
+        # Format the data for the template
+        feature_importance_data = feature_importance.head(10).to_dict(orient='records')
+        
+        # Round the values to 4 decimal places for display
+        for item in feature_importance_data:
+            item['importance'] = float(format(item['importance'], '.4f'))
+        
         plt.figure(figsize=(10, 6))
         sns.barplot(x='importance', y='feature', data=feature_importance.head(10))
         plt.title('Top 10 Feature Importance')
         importance_url = get_plot_url(plt, 'feature_importance.png')
         
-        return render_template('prediction_results.html', filename=filename, metric_name=metric_name, performance=performance, importance_url=importance_url)
+        return render_template('prediction_results.html', filename=filename, metric_name=metric_name, performance=performance, importance_url=importance_url, feature_importance_data=feature_importance_data)
     
     return render_template('predict.html', filename=filename, features=features)
 
